@@ -2,8 +2,9 @@
   "name": "soular",
   "version": "0.1.0",
   "private": true,
-"engines": {
-  "node:  "18.x"
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -13,7 +14,6 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-scripts": "5.0.1",
-    "swisseph": "^0.5.17",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -39,8 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "allowScripts": {
-    "swisseph@0.5.17": true
   }
 }
