@@ -83,7 +83,7 @@ function App() {
       }}>
         Your soul. Your stars. Your journey.
       </p>
-      <a href="#" style={{
+      <a href="/signup" style={{
         marginTop: '2.5rem',
         padding: '1rem 2.5rem',
         border: '1px solid #c9a96e',
