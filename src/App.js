@@ -80,6 +80,14 @@ function App() {
         <p className="section-label">What is Soular</p>
         <h2 className="section-title">Not your average horoscope app.</h2>
         <p className="value-prop">You were born under a specific sky. Soular decodes it — giving you personalized guidance from your natal chart and Human Design, whenever you need it.</p>
+        <div className="cosmyra-section">
+          <img src="/oracle1.png" alt="Cosmyra — your celestial guide" className="cosmyra-image" />
+          <div className="cosmyra-intro">
+            <p className="cosmyra-name">Meet Cosmyra</p>
+            <p className="cosmyra-desc">She is the conduit between you and the cosmos. Ancient, honored, and deeply trusted — she receives your questions as sacred and answers with the wisdom of the stars that were arranged just for you. She never predicts. She never commands. She opens doors that you get to choose to walk through.</p>
+            <p className="cosmyra-whisper">"I have been waiting for your question."</p>
+          </div>
+        </div>
         <p className="section-sub">Soular knows your exact birth chart and uses AI to translate it into guidance that speaks directly to your life, your questions, your moment.</p>
         <div className="pillars">
           <div className="pillar">
