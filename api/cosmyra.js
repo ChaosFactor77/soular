@@ -3,35 +3,37 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const keyExists = !!process.env.ANTHROPIC_KEY;
-  const keyPreview = process.env.ANTHROPIC_KEY ? process.env.ANTHROPIC_KEY.substring(0, 10) + "..." : "NOT FOUND";
-
-  if (!process.env.ANTHROPIC_KEY) {
-    return res.status(500).json({ 
-      error: "The stars are quiet for a moment. Please ask your question again.",
-      details: "API key not found. Key preview: " + keyPreview
-    });
-  }
-
   try {
     const { default: Anthropic } = await import("@anthropic-ai/sdk");
     
-    const client = new Anthropic({
-      apiKey: process.env.ANTHROPIC_KEY
+    const apiKey = process.env.ANTHROPIC_KEY;
+    
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01"
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: req.body.system,
+        messages: req.body.messages
+      })
     });
 
-    const { messages, system } = req.body;
+    const data = await response.json();
+    
+    if (data.error) {
+      return res.status(500).json({ 
+        error: "The stars are quiet for a moment. Please ask your question again.",
+        details: data.error.message
+      });
+    }
 
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-6",
-      max_tokens: 1000,
-      system: system,
-      messages: messages
-    });
-
-    res.status(200).json({ content: response.content });
+    res.status(200).json({ content: data.content });
   } catch (error) {
-    console.error("Cosmyra error:", error.message);
     res.status(500).json({ 
       error: "The stars are quiet for a moment. Please ask your question again.",
       details: error.message 
