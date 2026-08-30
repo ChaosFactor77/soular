@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
+import Cosmyra from './Cosmyra';
 
 function App() {
   const canvasRef = useRef(null);
@@ -106,6 +107,13 @@ function App() {
             <p className="pillar-text">Your bodygraph reveals your energy type, strategy, and authority. The operating manual you were never given.</p>
           </div>
         </div>
+      </section>
+
+      <section className="section" id="ask">
+        <p className="section-label">Ask YOUR Stars</p>
+        <h2 className="section-title">What would you like to know?</h2>
+        <p className="section-sub">Cosmyra is waiting. Type your question and let the stars speak directly to you.</p>
+        <Cosmyra />
       </section>
 
       <section className="section" id="pricing">
