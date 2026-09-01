@@ -7,7 +7,7 @@ function App() {
   const canvasRef = useRef(null);
   const [isAnnual, setIsAnnual] = useState(false);
   const [page, setPage] = useState("landing");
-  const [user, setUser] = useState(null);
+  const [, setUser] = useState(null);
 
   function handleAuth(user) {
     setUser(user);
@@ -106,7 +106,7 @@ function App() {
         <p className="hero-eyebrow">Astrology · Human Design · AI Insight</p>
         <div className="hero-feature-name">Ask <em>YOUR</em> Stars</div>
         <div className="hero-actions">
-          <a href="#" onClick={(e) => { e.preventDefault(); setPage("auth"); }} className="btn-primary">Discover what YOUR stars say</a>
+          <a href="/signup" onClick={(e) => { e.preventDefault(); setPage("auth"); }} className="btn-primary">Discover what YOUR stars say</a>
           <a href="#features" className="btn-ghost">See how it works</a>
         </div>
         <p className="hero-trial">72 hours free &nbsp;·&nbsp; no credit card required</p>
@@ -186,7 +186,7 @@ function App() {
               <li>10 Ask YOUR Stars questions/month</li>
               <li>Question history saved</li>
             </ul>
-            <a href="#" onClick={(e) => { e.preventDefault(); setPage("auth"); }} className="plan-btn solid">Begin your journey</a>
+            <a href="/signup" onClick={(e) => { e.preventDefault(); setPage("auth"); }} className="plan-btn solid">Begin your journey</a>
           </div>
           <div className="pricing-card">
             <div className="plan-name">Oracle</div>
@@ -209,7 +209,7 @@ function App() {
         </div>
         <h2 className="cta-title">The stars have been waiting<br/>to speak with you.</h2>
         <p className="cta-sub">72 hours free. No card. Just your birth data and an open question.</p>
-        <a href="#" onClick={(e) => { e.preventDefault(); setPage("auth"); }} className="btn-primary">Discover what YOUR stars say</a>
+        <a href="/signup" onClick={(e) => { e.preventDefault(); setPage("auth"); }} className="btn-primary">Discover what YOUR stars say</a>
       </section>
 
       <footer className="footer">
