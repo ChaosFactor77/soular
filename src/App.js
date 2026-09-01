@@ -4,6 +4,7 @@ import Cosmyra from './Cosmyra';
 import Auth from './Auth';
 
 function App() {
+window.scrollTo(0, 0);
   const canvasRef = useRef(null);
   const [isAnnual, setIsAnnual] = useState(false);
   const [page, setPage] = useState("landing");
