@@ -1,10 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Cosmyra from './Cosmyra';
+import Auth from './Auth';
 
 function App() {
   const canvasRef = useRef(null);
   const [isAnnual, setIsAnnual] = useState(false);
+  const [page, setPage] = useState("landing");
+  const [user, setUser] = useState(null);
+
+  function handleAuth(user) {
+    setUser(user);
+    setPage("app");
+  }
+
+
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -48,6 +58,31 @@ function App() {
     return () => cancelAnimationFrame(animId);
   }, []);
 
+  if (page === "auth") {
+    return (
+      <div className="app">
+        <canvas ref={canvasRef} className="starfield" />
+        <Auth onAuth={handleAuth} />
+      </div>
+    );
+  }
+
+  if (page === "app") {
+    return (
+      <div className="app">
+        <canvas ref={canvasRef} className="starfield" />
+        <nav className="nav">
+          <a className="nav-logo" href="/">Soular</a>
+        </nav>
+        <section className="section" style={{paddingTop: "8rem"}}>
+          <p className="section-label">Ask YOUR Stars</p>
+          <h2 className="section-title">Cosmyra is waiting</h2>
+          <Cosmyra />
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="app">
       <canvas ref={canvasRef} className="starfield" />
@@ -71,7 +106,7 @@ function App() {
         <p className="hero-eyebrow">Astrology · Human Design · AI Insight</p>
         <div className="hero-feature-name">Ask <em>YOUR</em> Stars</div>
         <div className="hero-actions">
-          <a href="/signup" className="btn-primary">Discover what YOUR stars say</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); setPage("auth"); }} className="btn-primary">Discover what YOUR stars say</a>
           <a href="#features" className="btn-ghost">See how it works</a>
         </div>
         <p className="hero-trial">72 hours free &nbsp;·&nbsp; no credit card required</p>
@@ -151,7 +186,7 @@ function App() {
               <li>10 Ask YOUR Stars questions/month</li>
               <li>Question history saved</li>
             </ul>
-            <a href="/signup" className="plan-btn solid">Begin your journey</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); setPage("auth"); }} className="plan-btn solid">Begin your journey</a>
           </div>
           <div className="pricing-card">
             <div className="plan-name">Oracle</div>
@@ -174,7 +209,7 @@ function App() {
         </div>
         <h2 className="cta-title">The stars have been waiting<br/>to speak with you.</h2>
         <p className="cta-sub">72 hours free. No card. Just your birth data and an open question.</p>
-        <a href="/signup" className="btn-primary">Discover what YOUR stars say</a>
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("auth"); }} className="btn-primary">Discover what YOUR stars say</a>
       </section>
 
       <footer className="footer">
