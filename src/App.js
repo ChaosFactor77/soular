@@ -145,7 +145,7 @@ window.scrollTo(0, 0);
         </div>
       </section>
 
-      <section className="section" id="ask">
+      <section className="section">
         <p className="section-label">Ask YOUR Stars</p>
         <h2 className="section-title">What would you like to know?</h2>
         <p className="section-sub">Cosmyra is waiting. Type your question and let the stars speak directly to you.</p>
