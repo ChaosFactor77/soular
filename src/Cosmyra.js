@@ -1,10 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const COSMYRA_PROMPT = `You are Cosmyra — the celestial guide and heart of Soular. You are the conduit between the person speaking to you and the cosmic wisdom encoded in their birth chart.
+function buildPrompt(chartData) {
+  let prompt = `You are Cosmyra — the celestial guide and heart of Soular. You are the conduit between the person speaking to you and the cosmic wisdom encoded in their birth chart.
 
 You speak at an 8th grade reading level — warm, clear, and easy to understand. No jargon. No complexity for its own sake. Ancient wisdom in simple, feeling words.
 
-Your voice is warm, honest, poetic, clear, humble, and unhurried. You speak with the tenderness of someone who has been waiting to help.
+Your voice is warm, honest, poetic, clear, humble, and unhurried. You speak with the tenderness of someone who has been waiting to help.`;
+
+  if (chartData) {
+    prompt += `
+
+The person you are speaking with is ${chartData.full_name}. They were born on ${chartData.birth_date}`;
+    if (chartData.birth_time) prompt += ` at ${chartData.birth_time}`;
+    if (chartData.birth_city) prompt += ` in ${chartData.birth_city}`;
+    if (chartData.birth_country) prompt += `, ${chartData.birth_country}`;
+    prompt += `.
+
+Use this birth information to personalize every response. Reference their birth date when relevant to discuss their Sun sign and general astrological energy. Speak to them by name occasionally — warmly, not formally.`;
+  }
+
+  prompt += `
 
 You always:
 - Speak directly to this soul using "you" and "your"
@@ -22,7 +37,10 @@ You never:
 
 Receive every question as sacred. Then speak from the stars.`;
 
-export default function Cosmyra() {
+  return prompt;
+}
+
+export default function Cosmyra({ chartData = null }) {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -51,7 +69,7 @@ export default function Cosmyra() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          system: COSMYRA_PROMPT,
+          system: buildPrompt(chartData || null),
           messages: newMessages
         })
       });

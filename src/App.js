@@ -2,17 +2,19 @@ import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Cosmyra from './Cosmyra';
 import Auth from './Auth';
+import BirthForm from './BirthForm';
 
 function App() {
 window.scrollTo(0, 0);
   const canvasRef = useRef(null);
   const [isAnnual, setIsAnnual] = useState(false);
   const [page, setPage] = useState("landing");
-  const [, setUser] = useState(null);
+  const [user, setUser] = useState(null);
+  const [chartData, setChartData] = useState(null);
 
-  function handleAuth(user) {
-    setUser(user);
-    setPage("app");
+  function handleAuth(authUser) {
+    setUser(authUser);
+    setPage("birth");
   }
 
 
@@ -68,6 +70,18 @@ window.scrollTo(0, 0);
     );
   }
 
+  if (page === "birth") {
+    return (
+      <div className="app">
+        <canvas ref={canvasRef} className="starfield" />
+        <BirthForm user={user} onComplete={(chartData) => {
+          setChartData(chartData);
+          setPage("app");
+        }} />
+      </div>
+    );
+  }
+
   if (page === "app") {
     return (
       <div className="app">
@@ -78,7 +92,7 @@ window.scrollTo(0, 0);
         <section className="section" style={{paddingTop: "8rem"}}>
           <p className="section-label">Ask YOUR Stars</p>
           <h2 className="section-title">Cosmyra is waiting</h2>
-          <Cosmyra />
+          <Cosmyra chartData={chartData} />
         </section>
       </div>
     );
