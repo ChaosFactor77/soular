@@ -52,7 +52,9 @@ export default function Cosmyra({ chartData = null }) {
   const bottomRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
   }, [messages]);
 
   async function askCosmyra() {
